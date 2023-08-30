@@ -52,6 +52,7 @@ class ActorViewsModel extends ViewModel
           "https://via.placeholder.com/185x278",
           'title' => $title,
           'linkToPage' => $movie['media_type'] === 'movie' ? route('movie.show', $movie['id']) : route('tv.show', $movie['id'])
+          
         ])->only('media_type','poster_path','id', 'title','name','linkToPage');
       });
     }
@@ -78,9 +79,10 @@ class ActorViewsModel extends ViewModel
           'release_date' => $releaseDate,
           'title' => $title,
           'character' => isset($movie['character']) ? $movie['character'] : '',
-          'release_year' => isset($releaseDate) ? Carbon::parse($releaseDate)->format('Y') : 'Future'
+          'release_year' => isset($releaseDate) ? Carbon::parse($releaseDate)->format('Y') : 'Future',
+          'linkToPage' => $movie['media_type'] === 'movie' ? route('movie.show', $movie['id']) : route('tv.show', $movie['id'])
 
-        ])->only('id','release_date','title','character','release_year','first_air_date','name');
+        ])->only('id','release_date','title','character','release_year','first_air_date','name','linkToPage');
       })->sortByDesc('release_date');
     }
 }
